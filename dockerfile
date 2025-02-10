@@ -22,6 +22,7 @@ RUN apt-get update && \
     libglib2.0-0 \
     libgtk-3-0 \
     libnspr4 \
+    libnss3 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libstdc++6 \
@@ -41,7 +42,6 @@ RUN apt-get update && \
     ca-certificates \
     fonts-liberation \
     libappindicator1 \
-    libnss3 \
     lsb-release \
     xdg-utils \
     wget \
