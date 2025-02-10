@@ -1,9 +1,11 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const express = require('express');
-const qrcode = require('qrcode-terminal');
+const qrcode = require('qrcode');
 
 const app = express();
 app.use(express.json());
+
+let qrCodeData = ''; // Store QR code data globally
 
 // Initialize WhatsApp client
 const client = new Client({
@@ -13,20 +15,29 @@ const client = new Client({
         args: [
             '--no-sandbox',
             '--disable-setuid-sandbox',
-            '--disable-dev-shm-usage', // Avoids issues with limited memory
+            '--disable-dev-shm-usage',
             '--disable-accelerated-2d-canvas',
             '--no-first-run',
             '--no-zygote',
-            '--single-process', // Reduces memory usage
-            '--disable-gpu', // Avoids GPU-related issues
+            '--single-process',
+            '--disable-gpu',
         ],
     },
 });
 
-// Scan QR Code for the first time
+// Generate and store QR Code for web display
 client.on('qr', (qr) => {
     console.log('🔍 Scan this QR Code to log in:');
-    qrcode.generate(qr, { small: true });
+    qrCodeData = qr; // Save for web access
+});
+
+// API endpoint to display QR Code in browser
+app.get('/qr', async (req, res) => {
+    if (!qrCodeData) {
+        return res.send("QR Code not available. Please wait...");
+    }
+    const qrImage = await qrcode.toDataURL(qrCodeData);
+    res.send(`<h2>Scan the QR Code</h2><img src="${qrImage}" style="width:300px"/>`);
 });
 
 // When client is ready
@@ -34,19 +45,19 @@ client.on('ready', () => {
     console.log('✅ WhatsApp Web is ready!');
 });
 
+// Handle disconnection
 client.on('disconnected', (reason) => {
     console.log(`⚠️ WhatsApp disconnected: ${reason}`);
     console.log('🔄 Restarting...');
-    client.initialize(); // Restart the session
+    client.initialize();
 });
 
-
-// Simple API endpoint
+// Root API endpoint
 app.get('/', (req, res) => {
     res.send('WhatsApp Web JS Server is running!');
-})
+});
 
-// API Endpoint to send a message
+// API Endpoint to send messages
 app.post('/send-message', async (req, res) => {
     const { number, message } = req.body;
 
@@ -55,7 +66,7 @@ app.post('/send-message', async (req, res) => {
     }
 
     try {
-        const chatId = `${number}@c.us`; // Ensure proper format
+        const chatId = `${number}@c.us`; // Ensure correct format
         await client.sendMessage(chatId, message);
         console.log(`📩 Message sent to ${number}: ${message}`);
         res.json({ success: true, message: 'Message sent successfully!' });
@@ -72,4 +83,5 @@ client.initialize();
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`🚀 Server is running on http://localhost:${PORT}`);
+    console.log(`📸 Open http://localhost:${PORT}/qr to scan the QR Code`);
 });
