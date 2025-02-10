@@ -29,6 +29,7 @@ const client = new Client({
 client.on('qr', (qr) => {
     console.log('🔍 Scan this QR Code to log in:');
     qrCodeData = qr; // Save for web access
+    qrcode.generate(qr, { small: true }); // Fixes QR display issue
 });
 
 // API endpoint to display QR Code in browser
