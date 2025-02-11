@@ -1,9 +1,16 @@
 const { Client, LocalAuth } = require('whatsapp-web.js');
 const express = require('express');
+const cors = require("cors")
 const qrcode = require('qrcode');
 
 const app = express();
 app.use(express.json());
+
+app.use(cors({
+    origin: [, "https://alzakry-server-production.up.railway.app"], 
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"]
+}));
 
 let qrCodeData = ''; // Store QR code data globally
 
