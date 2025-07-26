@@ -1,3 +1,2 @@
-2025/02/10-21:42:03.259 434c Reusing MANIFEST C:\alzakry-full-stack\whatsapp-server\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001
-2025/02/10-21:42:03.259 434c Recovering log #3
-2025/02/10-21:42:03.261 434c Reusing old log C:\alzakry-full-stack\whatsapp-server\.wwebjs_auth\session\Default\Service Worker\Database/000003.log 
+2025/07/26-16:20:39.244 5690 Creating DB C:\nodejs-projects\whatsapp-server\whatsapp-server-nodejs\.wwebjs_auth\session\Default\Service Worker\Database since it was missing.
+2025/07/26-16:20:39.268 5690 Reusing MANIFEST C:\nodejs-projects\whatsapp-server\whatsapp-server-nodejs\.wwebjs_auth\session\Default\Service Worker\Database/MANIFEST-000001

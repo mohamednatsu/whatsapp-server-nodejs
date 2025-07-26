@@ -1,3 +1,2 @@
-2025/02/10-21:42:07.109 434c Reusing MANIFEST C:\alzakry-full-stack\whatsapp-server\.wwebjs_auth\session\Default\Session Storage/MANIFEST-000001
-2025/02/10-21:42:07.111 434c Recovering log #3
-2025/02/10-21:42:07.114 434c Reusing old log C:\alzakry-full-stack\whatsapp-server\.wwebjs_auth\session\Default\Session Storage/000003.log 
+2025/07/26-16:20:37.866 3bc4 Creating DB C:\nodejs-projects\whatsapp-server\whatsapp-server-nodejs\.wwebjs_auth\session\Default\Session Storage since it was missing.
+2025/07/26-16:20:37.893 3bc4 Reusing MANIFEST C:\nodejs-projects\whatsapp-server\whatsapp-server-nodejs\.wwebjs_auth\session\Default\Session Storage/MANIFEST-000001
