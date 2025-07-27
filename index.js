@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 app.use(cors({
-    origin: ["https://alzakry-server-production.up.railway.app", "https://alzakry.vercel.app"], 
+    origin: ["https://alzakry-server-production.up.railway.app", "https://alzakry.vercel.app", "https://mahultd-server-app-production.up.railway.app"], 
     methods: ["GET", "POST"],
     allowedHeaders: ["Content-Type", "Authorization"]
 }));
